@@ -41,6 +41,7 @@ class HomepageContent(ListView):
         context['description'] = homepage_blog_section1.description
         context['blog_date'] = homepage_blog_section1.blog_date
 
-        context['latest_blog'] = Blog.objects.all()[1:4]
-        
+        #context['latest_blog'] = Blog.objects.all()[1:4]
+        context['latest_blog'] = Blog.objects.filter(published=True).order_by('-blog_date')[:3]
+
         return context
