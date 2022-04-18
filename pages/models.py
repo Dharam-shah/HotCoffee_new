@@ -21,8 +21,8 @@ class Blog(models.Model):
     slug = models.SlugField(unique=True, null=False)
     published = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f'ID{self.id} | {self.blog_title}'
+    # def __str__(self):
+    #     return f'ID{self.id} | {self.blog_title}'
 
     def save(self, *args, **kwargs):
         if not self.slug:

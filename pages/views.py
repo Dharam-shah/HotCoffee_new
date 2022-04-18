@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from pages.models import HomepageBanner,Blog
 from django.views.generic.list import ListView
+from django.utils import timezone
 # Create your views here.
 
 def homepage(request):
@@ -30,14 +31,16 @@ class HomepageContent(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        homepage_banner_content = HomepageBanner.objects.get(id=1)
-        context['banner_title'] = homepage_banner_content.banner_title
-        context['banner_subtitle'] = homepage_banner_content.banner_subtitle
-        context['banner_image'] = homepage_banner_content.banner_image
+        homepage_banner_content = HomepageBanner.objects.first()
+        context['banner_title'] = homepage_banner_content.banner_title if homepage_banner_content else None
+        context['banner_subtitle'] = homepage_banner_content.banner_subtitle if homepage_banner_content else None
+        context['banner_image'] = homepage_banner_content.banner_image if homepage_banner_content else None
 
         homepage_blog_section1 = Blog.objects.get(id=1)
         context['blog_title'] = homepage_blog_section1.blog_title
         context['description'] = homepage_blog_section1.description
         context['blog_date'] = homepage_blog_section1.blog_date
 
+        context['latest_blog'] = Blog.objects.all()[1:4]
+        
         return context
