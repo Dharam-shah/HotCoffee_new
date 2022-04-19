@@ -36,11 +36,12 @@ class HomepageContent(ListView):
         context['banner_subtitle'] = homepage_banner_content.banner_subtitle if homepage_banner_content else None
         context['banner_image'] = homepage_banner_content.banner_image if homepage_banner_content else None
 
-        homepage_blog_section1 = Blog.objects.get(id=1)
-        context['blog_title'] = homepage_blog_section1.blog_title
-        context['description'] = homepage_blog_section1.description
-        context['blog_date'] = homepage_blog_section1.blog_date
-
+        # homepage_blog_section1 = Blog.objects.get(id=1)
+        # context['blog_title'] = homepage_blog_section1.blog_title
+        # context['description'] = homepage_blog_section1.description
+        # context['blog_date'] = homepage_blog_section1.blog_date
+        context['hm_blog_sec1'] = Blog.objects.get(id=1)
+        
         #context['latest_blog'] = Blog.objects.all()[1:4]
         context['latest_blog'] = Blog.objects.filter(published=True).order_by('-blog_date')[:3]
 
