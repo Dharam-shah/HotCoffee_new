@@ -1,7 +1,8 @@
+from statistics import mode
 from django.shortcuts import render
 from pages.models import HomepageBanner,Blog
 from django.views.generic.list import ListView
-from django.utils import timezone
+from django.views.generic.detail import DetailView
 # Create your views here.
 
 def homepage(request):
@@ -36,13 +37,24 @@ class HomepageContent(ListView):
         context['banner_subtitle'] = homepage_banner_content.banner_subtitle if homepage_banner_content else None
         context['banner_image'] = homepage_banner_content.banner_image if homepage_banner_content else None
 
+        """ section First Blog """
         # homepage_blog_section1 = Blog.objects.get(id=1)
         # context['blog_title'] = homepage_blog_section1.blog_title
         # context['description'] = homepage_blog_section1.description
         # context['blog_date'] = homepage_blog_section1.blog_date
         context['hm_blog_sec1'] = Blog.objects.get(id=1)
         
+        """ section Second Blog """
         #context['latest_blog'] = Blog.objects.all()[1:4]
         context['latest_blog'] = Blog.objects.filter(published=True).order_by('-blog_date')[:3]
 
+        """ section Last Blog """
+        context['hm_blog_last'] = Blog.objects.get(id=5)
+
         return context
+
+class BlogDetailView(DetailView):
+    model = Blog
+    template_name = 'blogs/blog_detail.html'
+    context_object_name = 'blog_detail'
+    slug_url_kwarg = 'blog_slug'

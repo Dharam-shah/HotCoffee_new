@@ -32,7 +32,7 @@
                         <p>{{ hm_blog_sec1.description|truncatechars:150 }}</p>
                         <div class="blog-date mt-lg-4">
                             <span>{{ hm_blog_sec1.blog_date }}</span>
-                            <a href="#" class="read-more"><strong>Read More</strong></a>
+                            <a href="{% url 'blog_detail' hm_blog_sec1.slug %}" class="read-more"><strong>Read More</strong></a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <p>{{ single_blog.description|truncatechars:150 }}</p>
                         <div class="blog-date mt-lg-4">
                             <span>{{ single_blog.blog_date }}</span>
-                            <a href="#" class="read-more"><strong>Read More</strong></a>
+                            <a href="{% url 'blog_detail' single_blog.slug %}" class="read-more"><strong>Read More</strong></a>
                         </div>
                     </div>
                 </div>
@@ -108,11 +108,11 @@
             <div class="align-items-center last-blog">
                 <div class="col-lg-6">
                     <div class="blog-content p-lg-4 p-2">
-                        <h2 class="mb-lg-4 mb-md-3 mt-md-3">What is Lorem Ipsum?</h2>                  
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution...</p>
+                        <h2 class="mb-lg-4 mb-md-3 mt-md-3">{{ hm_blog_last.blog_title }}</h2>                  
+                        <p>{{ hm_blog_last.description|truncatechars:150 }}</p>
                         <div class="blog-date mt-lg-4">
-                            <span>May 20th 2020</span>
-                            <a href="#" class="read-more"><strong>Read More</strong></a>
+                            <span>{{ hm_blog_last.blog_date }}</span>
+                            <a href="{% url 'blog_detail' hm_blog_last.slug %}" class="read-more"><strong>Read More</strong></a>
                         </div>
                     </div>
                 </div>

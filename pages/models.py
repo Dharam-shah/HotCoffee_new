@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-
+from django.urls import reverse
 # Create your models here.
 
 """ Homepage Banner Model """
@@ -28,5 +28,8 @@ class Blog(models.Model):
         if not self.slug:
             self.slug = slugify(self.blog_title)
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog_detail', kwargs={'slug':self.slug})
     
 
